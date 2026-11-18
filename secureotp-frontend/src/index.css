@@ -1,0 +1,227 @@
+
+/* =========================================
+   SECUREOTP - GLOBAL DESIGN FOUNDATION
+========================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --accent: #8875ff;
+  --accent-strong: #6c5ce7;
+  --accent-soft: rgba(136, 117, 255, 0.15);
+
+  --success: #16a879;
+  --danger: #e05268;
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+
+  --transition: 220ms ease;
+}
+
+/* Dark theme */
+
+:root,
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --page-bg: #090d1b;
+  --page-bg-secondary: #11172b;
+
+  --text-primary: #f7f7ff;
+  --text-secondary: #a5aec4;
+  --text-muted: #77829c;
+
+  --glass-bg: rgba(255, 255, 255, 0.075);
+  --glass-border: rgba(255, 255, 255, 0.14);
+  --glass-shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
+
+  --input-bg: rgba(10, 17, 34, 0.65);
+  --input-border: rgba(255, 255, 255, 0.13);
+
+  --toggle-bg: rgba(255, 255, 255, 0.09);
+  --toggle-border: rgba(255, 255, 255, 0.15);
+
+  --background-gradient:
+    radial-gradient(
+      circle at 12% 12%,
+      rgba(103, 83, 255, 0.25),
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at 88% 85%,
+      rgba(39, 148, 255, 0.14),
+      transparent 32%
+    ),
+    linear-gradient(135deg, #090d1b, #11172b);
+}
+
+/* Light theme */
+
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --page-bg: #f2f4ff;
+  --page-bg-secondary: #e8ebff;
+
+  --text-primary: #20233a;
+  --text-secondary: #626983;
+  --text-muted: #858ba3;
+
+  --glass-bg: rgba(255, 255, 255, 0.62);
+  --glass-border: rgba(255, 255, 255, 0.85);
+  --glass-shadow: 0 24px 70px rgba(70, 73, 130, 0.12);
+
+  --input-bg: rgba(255, 255, 255, 0.75);
+  --input-border: rgba(113, 116, 165, 0.19);
+
+  --toggle-bg: rgba(255, 255, 255, 0.75);
+  --toggle-border: rgba(113, 116, 165, 0.18);
+
+  --background-gradient:
+    radial-gradient(
+      circle at 12% 12%,
+      rgba(151, 130, 255, 0.23),
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at 88% 85%,
+      rgba(89, 174, 255, 0.19),
+      transparent 32%
+    ),
+    linear-gradient(135deg, #f6f5ff, #e9efff);
+}
+
+/* Global layout */
+
+html {
+  min-width: 320px;
+  min-height: 100%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+  background: var(--background-gradient);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  transition:
+    background var(--transition),
+    color var(--transition);
+}
+
+#root {
+  min-height: 100vh;
+  height: auto;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: var(--accent);
+}
+
+::selection {
+  color: white;
+  background: var(--accent-strong);
+}
+
+/* Theme switch */
+
+.theme-toggle {
+  position: fixed;
+  z-index: 1000;
+  top: 20px;
+  right: 22px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  min-height: 43px;
+  padding: 0 15px;
+
+  color: var(--text-primary);
+  background: var(--toggle-bg);
+  border: 1px solid var(--toggle-border);
+  border-radius: 999px;
+
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  font-size: 13px;
+  font-weight: 650;
+
+  transition:
+    background var(--transition),
+    color var(--transition),
+    transform var(--transition);
+}
+
+.theme-toggle:hover {
+  transform: translateY(-2px);
+}
+
+.theme-toggle:active {
+  transform: scale(0.97);
+}
+
+.theme-toggle svg {
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+/* Accessibility */
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Responsive */
+
+@media (max-width: 480px) {
+  .theme-toggle {
+    top: 12px;
+    right: 12px;
+    min-height: 39px;
+    padding: 0 12px;
+    font-size: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
